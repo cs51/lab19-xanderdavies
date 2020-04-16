@@ -51,14 +51,15 @@ let update_balance (id : id) (n : int) : unit =
 
 let present_message (str : string) : unit =
   print_string str;
-  print_newline () ;;
+  print_newline ();;
 
 let deliver_cash (n : int) : unit =
   print_string ("Here's your cash: ");
-  for i = 0 to n / 20 do
+  for i = 1 to (n / 20) do
     print_string ("[20 @ 20]")
   done;
-  Printf.printf "and %i more" (n - n/20) ;;
+  Printf.printf " and %i more" (n - (n/20)*20);
+  print_newline ();;
 
 
 
