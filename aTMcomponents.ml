@@ -34,8 +34,8 @@ let acquire_act : unit -> action =
   | "B" -> fun () -> Balance
   | "-" -> fun () -> Withdraw (acquire_amount ())
   | "+" -> fun () -> Deposit (acquire_amount ())
-  | "=" -> fun () -> Next
-  | "X" -> fun () -> Finished
+  | "=" -> fun () -> Finished
+  | "X" -> fun () -> Next
   | _ -> raise (Invalid_argument ("Invalid input")) ;;
 
 let get_balance (id : id) : int =
