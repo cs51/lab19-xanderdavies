@@ -27,15 +27,16 @@ let acquire_amount : unit -> int =
   fun () -> (print_string("Enter amount: ");
   read_int ()) ;;
 
+" Enter action: (B) Balance (-) Withdraw (+) Deposit (=) Done (X) Exit: =Fatal error: exception End_of_file"
 
 let acquire_act : unit -> action =
-  print_string("Enter action: (B) Balance (-) Withdraw (+) Deposit (=) Done (X) Exit: =");
+  print_string("Enter action: (B) Balance (-) Withdraw (+) Deposit (=) Done (X) Exit: ");
   match read_line () with
   | "B" -> fun () -> Balance
   | "-" -> fun () -> Withdraw (acquire_amount ())
   | "+" -> fun () -> Deposit (acquire_amount ())
-  | "=" -> fun () -> Finished
-  | "X" -> fun () -> Next
+  | "=" -> fun () -> Next
+  | "X" -> fun () -> Finished
   | _ -> raise (Invalid_argument ("Invalid input")) ;;
 
 let get_balance (id : id) : int =
