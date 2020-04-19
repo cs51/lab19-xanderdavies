@@ -32,9 +32,9 @@ the database manipulation within one or more classes, for instance, an
 
 open Printf ;;
 open Scanf ;;
-  
+
 (* Make use of an account database *)
-module DB = Database3 ;; 
+module DB = Database ;;
 
 (* Customer account identifiers *)
 type id = int ;;
@@ -46,7 +46,7 @@ type action =
   | Deposit of int    (* deposit an amount *)
   | Next              (* finish this customer and move on to the next one *)
   | Finished          (* shut down the ATM and exit entirely *)
-;; 
+;;
 
 (* A specification of a customer name and initial balance *)
 type account_spec = {name : string; id : id; balance : int} ;;
@@ -62,15 +62,15 @@ let initialize (initial : account_spec list) : unit =
                    DB.update id balance) ;;
 
 let rec acquire_id () : id =
-  printf "Enter customer id: "; 
+  printf "Enter customer id: ";
   try
     let id = read_int () in
     ignore (DB.exists id); id
   with
-  | Not_found 
+  | Not_found
   | Failure _ -> printf "Invalid id \n";
                  acquire_id () ;;
-                  
+
 let rec acquire_amount () : int =
   printf "Enter amount: ";
   try
@@ -80,7 +80,7 @@ let rec acquire_amount () : int =
   with
   | Failure _ -> printf "Invalid amount \n";
                  acquire_amount () ;;
-  
+
 let rec acquire_act () : action =
   printf "Enter action: (B) Balance (-) Withdraw (+) Deposit \
           (=) Done (X) Exit: %!";
@@ -100,9 +100,9 @@ let get_name : id -> string = DB.name ;;
 
 let update_balance : id -> int -> unit = DB.update ;;
 
-let present_message (msg : string) : unit = 
+let present_message (msg : string) : unit =
   printf "%s\n%!" msg ;;
-  
+
 let deliver_cash (amount : int) : unit =
   printf "Here's your cash: ";
   (* dispense some "20's" *)
