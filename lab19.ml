@@ -84,4 +84,5 @@ let init : ATM.account_spec list =
   ] ;;
 
 (* Fire up the ATM *)
-let _ = atm init ;;
+let _ =
+  atm init ;;
